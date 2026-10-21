@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vocals Only</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>
+    <h1>Vocals Only</h1>
+  </div>
+  <button id="status" class="pill" title="Check the server again" aria-live="polite"><span class="dot"></span><span id="statusText">Checking server...</span></button>
+</header>
+
+<section class="card hero">
+  <button id="toggle" class="primary" disabled>Turn on for this tab</button>
+  <p id="toggleHint" class="hint">Open a page with a video or audio, then switch it on. Shortcut: Alt + V</p>
+</section>
+
+<section class="card">
+  <h2>Quality and speed</h2>
+
+  <label class="row">
+    <span class="label">Quality<small>Auto picks the best your PC can run live</small></span>
+    <select id="model">
+      <option value="auto">Auto (recommended)</option>
+      <option value="best">Best (needs an NVIDIA graphics card)</option>
+      <option value="light">Light (works on any PC)</option>
+    </select>
+  </label>
+
+  <div class="row stack">
+    <span class="label">Delay<small id="delayNote">How far behind live the picture and vocals run</small></span>
+    <div class="seg" role="group" aria-label="Delay mode">
+      <button id="delayAuto" type="button">Auto</button>
+      <button id="delayManual" type="button">Manual</button>
+    </div>
+  </div>
+  <div id="delayRow" class="row slider hidden">
+    <input id="delayManualRange" type="range" min="3" max="15" step="0.5" aria-label="Manual delay in seconds">
+    <output id="delayVal"></output>
+  </div>
+
+  <label class="row">
+    <span class="label">Picture size<small>Smaller uses less memory</small></span>
+    <select id="maxWidth">
+      <option value="640">Low (480p)</option>
+      <option value="1280">Normal (720p)</option>
+      <option value="1920">High (1080p)</option>
+    </select>
+  </label>
+  <p class="hint">Quality, delay and picture size apply the next time you turn it on.</p>
+</section>
+
+<section class="card">
+  <h2>Sync and sound</h2>
+
+  <div class="row stack">
+    <span class="label">Fine sync<small>If lips look early or late. Alt + , and Alt + . do the same</small></span>
+  </div>
+  <div class="row slider">
+    <button id="trimMinus" class="step" aria-label="Vocals 10 ms earlier">-</button>
+    <input id="trim" type="range" min="-500" max="500" step="10" aria-label="Fine sync in milliseconds">
+    <button id="trimPlus" class="step" aria-label="Vocals 10 ms later">+</button>
+    <output id="trimVal"></output>
+    <button id="trimReset" class="link">Reset</button>
+  </div>
+
+  <div class="row stack">
+    <span class="label">Vocal volume</span>
+  </div>
+  <div class="row slider">
+    <input id="gain" type="range" min="50" max="200" step="5" aria-label="Vocal volume in percent">
+    <output id="gainVal"></output>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Where it works</h2>
+  <label class="row">
+    <span class="label">Sites</span>
+    <select id="sites">
+      <option value="all">All sites</option>
+      <option value="youtube">YouTube only</option>
+    </select>
+  </label>
+  <label class="row">
+    <span class="label">Round button on other sites<small>Hide it and use Alt + V instead</small></span>
+    <input id="fab" type="checkbox" role="switch">
+  </label>
+  <label class="row">
+    <span class="label">Server port<small>Change only if you changed it in the server</small></span>
+    <input id="port" type="number" min="1024" max="65535" class="num">
+  </label>
+</section>
+
+<footer>
+  <p>Everything runs on this PC. Nothing is sent over the internet.</p>
+</footer>
+<script src="popup.js"></script>
+</body>
+</html>

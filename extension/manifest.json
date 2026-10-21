@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Vocals Only (local AI)",
+  "version": "0.3.0",
+  "description": "Removes music from videos and audio on web pages, keeping the vocals. Runs on your own PC with a local server.",
+  "permissions": ["storage", "activeTab"],
+  "background": { "service_worker": "sw.js" },
+  "action": { "default_popup": "popup.html", "default_title": "Vocals Only: settings", "default_icon": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" } },
+  "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["bridge.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "world": "MAIN"
+    }
+  ]
+}
